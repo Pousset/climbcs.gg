@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "description": "CS2 demo analysis platform: 2D replay, stats, rating and coaching tips.",
-  "workspaces": ["packages/*", "apps/*"],
-  "engines": { "node": ">=20" },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
@@ -12,5 +17,14 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.2"
   }
 }
