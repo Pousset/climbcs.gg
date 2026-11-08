@@ -1,0 +1,16 @@
+{
+  "name": "cs2-demo-analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CS2 demo analysis platform: 2D replay, stats, rating and coaching tips.",
+  "workspaces": ["packages/*", "apps/*"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  }
+}
