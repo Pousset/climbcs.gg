@@ -14,6 +14,7 @@ const envSchema = z
     SQLITE_PATH: z.string().min(1).default('./storage/dev.sqlite'),
     JWT_SECRET: z.string().min(16).optional(),
     JWT_EXPIRES_IN: z.string().min(1).default('7d'),
+    BCRYPT_ROUNDS: z.coerce.number().int().min(4).max(15).default(12),
     STORAGE_DIR: z.string().min(1).default('./storage'),
     MAX_DEMO_SIZE_MB: z.coerce.number().int().positive().default(512),
     ENABLE_DEV_PLAN_SWITCH: booleanFlag,
@@ -39,6 +40,7 @@ export interface AppConfig {
   port: number;
   database: DatabaseConfig;
   jwt: { secret: string; expiresIn: string };
+  bcryptRounds: number;
   storageDir: string;
   maxDemoBytes: number;
   devPlanSwitch: boolean;
@@ -68,6 +70,7 @@ export function loadEnv(raw: NodeJS.ProcessEnv): AppConfig {
         ? { type: 'postgres', url: env.DATABASE_URL! }
         : { type: 'sqlite', path: env.SQLITE_PATH },
     jwt: { secret: env.JWT_SECRET ?? DEV_JWT_SECRET, expiresIn: env.JWT_EXPIRES_IN },
+    bcryptRounds: env.BCRYPT_ROUNDS,
     storageDir: env.STORAGE_DIR,
     maxDemoBytes: env.MAX_DEMO_SIZE_MB * 1024 * 1024,
     devPlanSwitch: env.ENABLE_DEV_PLAN_SWITCH,

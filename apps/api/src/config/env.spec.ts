@@ -41,6 +41,13 @@ describe('loadEnv', () => {
     expect(config.jwt.secret).toBe('x'.repeat(32));
   });
 
+  it('makes the bcrypt cost configurable within a safe range', () => {
+    expect(loadEnv({}).bcryptRounds).toBe(12);
+    expect(loadEnv({ BCRYPT_ROUNDS: '4' }).bcryptRounds).toBe(4);
+    expect(() => loadEnv({ BCRYPT_ROUNDS: '3' })).toThrow(/BCRYPT_ROUNDS/);
+    expect(() => loadEnv({ BCRYPT_ROUNDS: '20' })).toThrow(/BCRYPT_ROUNDS/);
+  });
+
   it('rejects a short JWT secret', () => {
     expect(() => loadEnv({ JWT_SECRET: 'short' })).toThrow(/JWT_SECRET/);
   });

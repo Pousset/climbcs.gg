@@ -15,6 +15,7 @@ export function testConfig(overrides: Partial<AppConfig> = {}): AppConfig {
       NODE_ENV: 'test',
       SQLITE_PATH: ':memory:',
       JWT_SECRET: 'test-secret-test-secret',
+      BCRYPT_ROUNDS: '4',
       STORAGE_DIR: mkdtempSync(join(tmpdir(), 'cs2-api-')),
     }),
     ...overrides,
