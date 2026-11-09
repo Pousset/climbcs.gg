@@ -16,6 +16,12 @@ export default tseslint.config(
     },
   },
   {
+    // NestJS resolves dependencies from emitted decorator metadata, so injected classes
+    // must stay regular (value) imports.
+    files: ['apps/api/**/*.ts'],
+    rules: { '@typescript-eslint/consistent-type-imports': 'off' },
+  },
+  {
     files: ['**/*.spec.ts', '**/*.test.ts', '**/*.test.tsx', '**/test/**'],
     rules: { '@typescript-eslint/no-explicit-any': 'off' },
   },
