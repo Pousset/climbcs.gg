@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FREE_DAILY_DEMO_LIMIT, evaluateQuota, utcDayKey } from '@cs2/core';
+import { evaluateQuota, utcDayKey } from '@cs2/core';
 import type { QuotaStatus } from '@cs2/core';
 import { Not, Repository } from 'typeorm';
 import { CLOCK } from '../common/clock';
@@ -22,21 +22,5 @@ export class DemoQuotaService {
       where: { userId: user.id, dayKey: utcDayKey(now), status: Not('failed') },
     });
     return evaluateQuota(user.plan, used, now);
-  }
-
-  /**
-   * Re-checks a freshly inserted demo against the quota. Two concurrent uploads can both pass
-   * {@link status}; ranking the day's demos in a stable order guarantees only the first
-   * `FREE_DAILY_DEMO_LIMIT` survive, whatever the interleaving.
-   */
-  async isWithinQuota(user: Pick<User, 'id' | 'plan'>, demo: Demo): Promise<boolean> {
-    if (user.plan === 'premium') return true;
-    const allowed = await this.demos.find({
-      select: { id: true },
-      where: { userId: user.id, dayKey: demo.dayKey, status: Not('failed') },
-      order: { createdAt: 'ASC', id: 'ASC' },
-      take: FREE_DAILY_DEMO_LIMIT,
-    });
-    return allowed.some((d) => d.id === demo.id);
   }
 }

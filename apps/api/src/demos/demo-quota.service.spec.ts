@@ -81,27 +81,4 @@ describe('DemoQuotaService', () => {
       expect(await service.status(premium)).toMatchObject({ allowed: true, limit: null, used: 3 });
     });
   });
-
-  describe('isWithinQuota', () => {
-    it('keeps the earliest demo of the day and rejects later ones', async () => {
-      const first = await addDemo(free.id, { createdAt: new Date('2026-11-13T09:00:00Z') });
-      const second = await addDemo(free.id, { createdAt: new Date('2026-11-13T09:00:05Z') });
-      expect(await service.isWithinQuota(free, first)).toBe(true);
-      expect(await service.isWithinQuota(free, second)).toBe(false);
-    });
-
-    it('keeps exactly one demo when two were created at the same instant', async () => {
-      const at = new Date('2026-11-13T09:00:00Z');
-      const a = await addDemo(free.id, { createdAt: at });
-      const b = await addDemo(free.id, { createdAt: at });
-      const results = [await service.isWithinQuota(free, a), await service.isWithinQuota(free, b)];
-      expect(results.filter(Boolean)).toHaveLength(1);
-    });
-
-    it('always accepts premium users', async () => {
-      await addDemo(premium.id);
-      const extra = await addDemo(premium.id);
-      expect(await service.isWithinQuota(premium, extra)).toBe(true);
-    });
-  });
 });
