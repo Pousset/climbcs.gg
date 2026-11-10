@@ -25,6 +25,7 @@
     "ts-jest": "^29.4.15"
   },
   "dependencies": {
+    "@laihoe/demoparser2": "^0.42.0",
     "@nestjs/common": "^11.2.10",
     "@nestjs/core": "^11.2.10",
     "@nestjs/jwt": "^11.0.2",
