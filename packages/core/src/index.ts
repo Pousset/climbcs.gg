@@ -7,3 +7,4 @@ export * from './rating';
 export * from './tips';
 export * from './sample';
 export * from './report';
+export * from './quota';
