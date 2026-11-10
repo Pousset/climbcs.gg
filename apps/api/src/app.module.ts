@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import type { DynamicModule } from '@nestjs/common';
+import { AccountModule } from './account/account.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from './config/config.module';
 import { loadEnv } from './config/env';
@@ -12,7 +13,7 @@ export class AppModule {
   static forRoot(config: AppConfig = loadEnv(process.env)): DynamicModule {
     return {
       module: AppModule,
-      imports: [ConfigModule.forRoot(config), DatabaseModule, AuthModule],
+      imports: [ConfigModule.forRoot(config), DatabaseModule, AuthModule, AccountModule],
       controllers: [HealthController],
     };
   }

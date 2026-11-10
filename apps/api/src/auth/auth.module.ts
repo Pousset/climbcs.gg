@@ -6,6 +6,7 @@ import type { AppConfig } from '../config/env';
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './jwt-auth.guard';
 import { PasswordService } from './password.service';
 
 @Module({
@@ -20,7 +21,7 @@ import { PasswordService } from './password.service';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, PasswordService],
-  exports: [AuthService, PasswordService, JwtModule],
+  providers: [AuthService, PasswordService, JwtAuthGuard],
+  exports: [AuthService, PasswordService, JwtAuthGuard, JwtModule, UsersModule],
 })
 export class AuthModule {}
