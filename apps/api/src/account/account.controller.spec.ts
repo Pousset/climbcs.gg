@@ -50,3 +50,64 @@ describe('GET /api/users/me (e2e)', () => {
     await http().get('/api/users/me').set('Authorization', `Bearer ${orphan}`).expect(401);
   });
 });
+
+describe('PUT /api/users/me/plan (e2e)', () => {
+  const register = async (app: INestApplication, username: string): Promise<string> => {
+    const res = await request(app.getHttpServer())
+      .post('/api/auth/register')
+      .send({ username, password: 'my-password' });
+    return res.body.accessToken as string;
+  };
+
+  describe('when the dev plan switch is enabled', () => {
+    let app: INestApplication;
+    let token: string;
+
+    beforeAll(async () => {
+      ({ app } = await createTestApp({ devPlanSwitch: true }));
+      token = await register(app, 'Switcher');
+    });
+
+    afterAll(async () => {
+      await app.close();
+    });
+
+    it('switches the plan and persists it', async () => {
+      const put = await request(app.getHttpServer())
+        .put('/api/users/me/plan')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ plan: 'premium' })
+        .expect(200);
+      expect(put.body.plan).toBe('premium');
+      const me = await request(app.getHttpServer())
+        .get('/api/users/me')
+        .set('Authorization', `Bearer ${token}`);
+      expect(me.body.plan).toBe('premium');
+    });
+
+    it('rejects an unknown plan and unauthenticated calls', async () => {
+      await request(app.getHttpServer())
+        .put('/api/users/me/plan')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ plan: 'enterprise' })
+        .expect(400);
+      await request(app.getHttpServer())
+        .put('/api/users/me/plan')
+        .send({ plan: 'free' })
+        .expect(401);
+    });
+  });
+
+  describe('when the dev plan switch is disabled (default)', () => {
+    it('behaves as if the route does not exist', async () => {
+      const { app } = await createTestApp();
+      const token = await register(app, 'NoSwitch');
+      await request(app.getHttpServer())
+        .put('/api/users/me/plan')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ plan: 'premium' })
+        .expect(404);
+      await app.close();
+    });
+  });
+});
