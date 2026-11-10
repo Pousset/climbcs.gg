@@ -6,3 +6,15 @@ export interface DemoParser {
 }
 
 export const DEMO_PARSER = Symbol('DEMO_PARSER');
+
+export type DemoParseErrorCode = 'NO_ROUNDS' | 'PARSE_FAILED';
+
+export class DemoParseError extends Error {
+  constructor(
+    public readonly code: DemoParseErrorCode,
+    cause?: unknown,
+  ) {
+    super(code, { cause });
+    this.name = 'DemoParseError';
+  }
+}
