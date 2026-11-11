@@ -6,6 +6,7 @@ import { ConfigModule } from './config/config.module';
 import { loadEnv } from './config/env';
 import type { AppConfig } from './config/env';
 import { DatabaseModule } from './database/database.module';
+import { DemosModule } from './demos/demos.module';
 import { HealthController } from './health/health.controller';
 
 @Module({})
@@ -13,7 +14,13 @@ export class AppModule {
   static forRoot(config: AppConfig = loadEnv(process.env)): DynamicModule {
     return {
       module: AppModule,
-      imports: [ConfigModule.forRoot(config), DatabaseModule, AuthModule, AccountModule],
+      imports: [
+        ConfigModule.forRoot(config),
+        DatabaseModule,
+        AuthModule,
+        AccountModule,
+        DemosModule,
+      ],
       controllers: [HealthController],
     };
   }

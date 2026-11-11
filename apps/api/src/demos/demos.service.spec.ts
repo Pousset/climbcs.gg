@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   ForbiddenException,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
@@ -203,7 +204,7 @@ describe('DemosService', () => {
     });
 
     it('reports unexpected errors as PARSE_FAILED', async () => {
-      jest.spyOn(console, 'error').mockImplementation(() => undefined);
+      jest.spyOn(Logger.prototype, 'error').mockImplementation(() => undefined);
       parse.mockRejectedValueOnce(new Error('segfault'));
       const demo = await service.submit(alice, await upload());
       await service.whenIdle();

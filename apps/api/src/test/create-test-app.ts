@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import type { TestingModuleBuilder } from '@nestjs/testing';
 import { AppModule } from '../app.module';
 import { configureApp } from '../bootstrap';
 import { loadEnv } from '../config/env';
@@ -24,11 +25,12 @@ export function testConfig(overrides: Partial<AppConfig> = {}): AppConfig {
 
 export async function createTestApp(
   overrides: Partial<AppConfig> = {},
+  customize: (builder: TestingModuleBuilder) => TestingModuleBuilder = (builder) => builder,
 ): Promise<{ app: INestApplication; config: AppConfig }> {
   const config = testConfig(overrides);
-  const moduleRef = await Test.createTestingModule({
-    imports: [AppModule.forRoot(config)],
-  }).compile();
+  const moduleRef = await customize(
+    Test.createTestingModule({ imports: [AppModule.forRoot(config)] }),
+  ).compile();
   const app = moduleRef.createNestApplication();
   configureApp(app, config);
   await app.init();
