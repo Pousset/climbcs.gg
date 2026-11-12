@@ -1,0 +1,68 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-7) 0 var(--space-6);
+}
+
+.hero__lead {
+  font-size: var(--step-1);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.hero__caption {
+  margin: var(--space-2) 0 0;
+  font-size: var(--step--1);
+}
+
+.section {
+  padding: var(--space-6) 0;
+}
+
+.section__report {
+  max-width: 44rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: var(--space-5);
+}
+
+.plans {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  background: var(--surface);
+}
+
+.plans th,
+.plans td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.plans thead th {
+  font-family: var(--font-display);
+}
+
+.about__list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding-left: 1.2rem;
+  max-width: 62ch;
+}
+
+@media (max-width: 60rem) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: var(--space-6);
+  }
+}

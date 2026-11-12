@@ -1,11 +1,32 @@
 import { screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from './App';
 import { renderWithProviders } from './test/helpers';
+import { createRecordingContext } from './test/recording-context';
 
 describe('App routing', () => {
-  it('redirects the root to the login page for anonymous visitors', () => {
+  beforeEach(() => {
+    vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockImplementation(
+      () => createRecordingContext().ctx as unknown as RenderingContext,
+    );
+    vi.stubGlobal('requestAnimationFrame', () => 1);
+    vi.stubGlobal('cancelAnimationFrame', () => undefined);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it('serves the landing page at the root', () => {
     renderWithProviders(<App />);
+    expect(
+      screen.getByRole('heading', { level: 1, name: /Revois chaque round/ }),
+    ).toBeInTheDocument();
+  });
+
+  it('serves the login page', () => {
+    renderWithProviders(<App />, { route: '/connexion' });
     expect(screen.getByRole('heading', { name: 'Connexion' })).toBeInTheDocument();
   });
 
