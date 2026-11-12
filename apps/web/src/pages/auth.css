@@ -1,0 +1,4 @@
+.auth__form {
+  width: min(100%, 24rem);
+  margin-bottom: var(--space-5);
+}
