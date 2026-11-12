@@ -40,6 +40,16 @@ describe('App routing', () => {
     expect(screen.getByRole('heading', { name: 'Page introuvable' })).toBeInTheDocument();
   });
 
+  it('protects the dashboard behind authentication', () => {
+    renderWithProviders(<App />, { route: '/tableau-de-bord' });
+    expect(screen.getByRole('heading', { name: 'Connexion' })).toBeInTheDocument();
+  });
+
+  it('serves the dashboard to authenticated users', async () => {
+    renderWithProviders(<App />, { route: '/tableau-de-bord', token: 'tok' });
+    expect(await screen.findByRole('heading', { name: 'Mes démos' })).toBeInTheDocument();
+  });
+
   it('exposes a skip link and the main landmark', () => {
     renderWithProviders(<App />);
     expect(screen.getByRole('link', { name: 'Aller au contenu' })).toHaveAttribute(
