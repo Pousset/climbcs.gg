@@ -1,0 +1,137 @@
+.replay {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.replay__rounds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.replay__round {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.25rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--step--1);
+  cursor: pointer;
+}
+
+.replay__round[aria-pressed='true'] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.replay__winner {
+  padding: 0 var(--space-2);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.replay__winner--CT {
+  background: var(--ct);
+  color: #fff;
+}
+
+.replay__winner--T {
+  background: var(--t);
+  color: var(--ink);
+}
+
+.replay__stage {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--board);
+  color: var(--board-text);
+}
+
+.replay__hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.replay__team--CT {
+  color: #7db3ea;
+}
+
+.replay__team--T {
+  color: var(--t);
+}
+
+.replay__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 960 / 600;
+  border-radius: var(--radius-sm);
+}
+
+.replay__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.replay__controls .btn--primary {
+  min-width: 6.5rem;
+  border-color: var(--board-text);
+  background: var(--board-text);
+  color: var(--board);
+}
+
+.replay__timeline {
+  position: relative;
+  flex: 1;
+}
+
+.replay__timeline input {
+  width: 100%;
+  accent-color: var(--board-text);
+}
+
+.replay__markers {
+  position: absolute;
+  inset: auto 0 -4px 0;
+  height: 6px;
+  pointer-events: none;
+}
+
+.replay__marker {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  background: var(--kill);
+}
+
+.replay__speed select {
+  min-height: 2.25rem;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--board-grid);
+  border-radius: var(--radius-sm);
+  background: var(--board);
+  color: var(--board-text);
+  font: inherit;
+}
+
+.replay__feed {
+  display: grid;
+  gap: var(--space-1);
+  min-height: 5.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+}
