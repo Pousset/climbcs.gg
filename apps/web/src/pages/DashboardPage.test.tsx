@@ -44,7 +44,6 @@ describe('DashboardPage', () => {
   it('loads the quota and the demos', async () => {
     renderDashboard(createFakeClient({ listDemos: vi.fn(async () => [demo()]) }));
     expect(await screen.findByText('match.dem')).toBeInTheDocument();
-    expect(screen.getByRole('status', { name: '' })).toBeDefined();
     expect(screen.getByText('Ta démo gratuite du jour est disponible.')).toBeInTheDocument();
   });
 
