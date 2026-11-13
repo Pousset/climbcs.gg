@@ -9,11 +9,11 @@ premium unlocks the detailed report.
 
 ## Monorepo layout
 
-| Path            | Package    | Role                                                                 |
-| --------------- | ---------- | -------------------------------------------------------------------- |
-| `packages/core` | `@cs2/core`| Pure, framework-free domain logic (geometry, interpolation, stats…)  |
-| `apps/api`      | `@cs2/api` | NestJS REST API (auth, quota, demo upload and parsing)               |
-| `apps/web`      | `@cs2/web` | React + Vite front-end (landing page, dashboard, replay viewer)      |
+| Path            | Package     | Role                                                                |
+| --------------- | ----------- | ------------------------------------------------------------------- |
+| `packages/core` | `@cs2/core` | Pure, framework-free domain logic (geometry, interpolation, stats…) |
+| `apps/api`      | `@cs2/api`  | NestJS REST API (auth, quota, demo upload and parsing)              |
+| `apps/web`      | `@cs2/web`  | React + Vite front-end (landing page, dashboard, replay viewer)     |
 
 Design rule: **business logic lives in `@cs2/core` as pure functions**, fully unit-tested, and is
 consumed by both the API and the web app. Framework code stays thin.

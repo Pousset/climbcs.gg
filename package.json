@@ -16,7 +16,9 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "dev:api": "npm run build -w @cs2/core && npm run build -w @cs2/api && npm run start:env -w @cs2/api",
+    "dev:web": "npm run dev -w @cs2/web"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
