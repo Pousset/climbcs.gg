@@ -1,0 +1,7 @@
+.demo__section {
+  margin-top: var(--space-6);
+}
+
+.demo__section .report {
+  max-width: 44rem;
+}
