@@ -12,9 +12,9 @@ describe('ZodValidationPipe', () => {
   });
 
   it('throws a 400 listing every invalid field', () => {
+    expect.assertions(3);
     try {
       pipe.transform({ name: 'A', age: 'x' });
-      fail('expected the pipe to throw');
     } catch (error) {
       expect(error).toBeInstanceOf(BadRequestException);
       const body = (error as BadRequestException).getResponse() as {
