@@ -3,7 +3,7 @@ import './report.css';
 interface LockedSectionProps {
   title: string;
   description: string;
-  /** Hidden from assistive tech: only decorative placeholder shapes are rendered. */
+  /** Number of decorative placeholder bars (hidden from assistive tech). */
   previewLines?: number;
   onUpgrade?: () => void;
   upgradeLabel?: string;
