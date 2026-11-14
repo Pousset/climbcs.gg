@@ -1,4 +1,4 @@
-# CS2 Demo Analyzer
+# csClimb.gg
 
 Web platform that turns Counter-Strike 2 demo files into an interactive **2D replay**, a
 **scoreboard**, a **rating** and **coaching tips**. Free accounts analyse one demo per day;

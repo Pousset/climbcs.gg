@@ -100,7 +100,7 @@ export function LandingPage() {
       <section className="container section about" aria-labelledby="apropos">
         <h2 id="apropos">Un projet construit comme un vrai produit</h2>
         <p>
-          CS2 Demo Analyzer est un projet de développement full-stack, conçu pour montrer une
+          csClimb.gg est un projet de développement full-stack, conçu pour montrer une
           approche rigoureuse : code testé, architecture claire, livraison continue.
         </p>
         <ul className="about__list">

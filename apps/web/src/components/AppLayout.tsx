@@ -11,9 +11,9 @@ export function AppLayout() {
       </a>
       <header className="site-header">
         <div className="container site-header__inner">
-          <Link to="/" className="brand" aria-label="CS2 Demo Analyzer, accueil">
+          <Link to="/" className="brand" aria-label="csClimb.gg, accueil">
             <span className="brand__mark" aria-hidden="true" />
-            CS2 Demo Analyzer
+            csClimb.gg
           </Link>
           <nav aria-label="Navigation principale" className="site-nav">
             {status === 'authenticated' ? (
